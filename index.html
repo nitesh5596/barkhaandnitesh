@@ -23,7 +23,6 @@ text-align:center;
 min-height:100vh;
 }
 
-/* Fireworks canvas */
 #fireworks{
 position:fixed;
 top:0;
@@ -31,9 +30,9 @@ left:0;
 width:100%;
 height:100%;
 z-index:0;
+pointer-events:none;
 }
 
-/* Main content */
 .container{
 position:relative;
 z-index:2;
@@ -42,10 +41,9 @@ max-width:900px;
 margin:auto;
 }
 
-/* Open Gift */
 #openGift{
 margin-top:150px;
-font-size:30px;
+font-size:28px;
 padding:15px 40px;
 border:none;
 border-radius:50px;
@@ -61,7 +59,6 @@ animation:pulse 1.5s infinite;
 100%{transform:scale(1);}
 }
 
-/* Question section */
 #questionSection{
 display:none;
 margin-top:60px;
@@ -92,19 +89,19 @@ color:white;
 }
 
 #noBtn{
-background:#999;
+background:#888;
 color:white;
 position:relative;
 }
 
-/* Photo */
 .photo{
 margin-top:40px;
 display:none;
 }
 
 .photo img{
-width:250px;
+width:260px;
+max-width:90%;
 border-radius:20px;
 box-shadow:0 0 25px #ff4b2b;
 animation:glow 2s infinite alternate;
@@ -115,7 +112,6 @@ from{box-shadow:0 0 20px #ff4b2b;}
 to{box-shadow:0 0 40px #ff416c;}
 }
 
-/* Message */
 #message{
 margin-top:40px;
 font-size:20px;
@@ -124,10 +120,9 @@ white-space:pre-line;
 min-height:150px;
 }
 
-/* Ring */
 .ring{
 font-size:60px;
-margin-top:20px;
+margin-top:25px;
 display:none;
 animation:spin 3s linear infinite;
 }
@@ -137,21 +132,20 @@ from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
 
-/* I Love You animation */
 #loveText{
 font-family:'Great Vibes',cursive;
 font-size:45px;
 margin-top:40px;
 display:none;
-animation:fadeGlow 2s infinite alternate;
+animation:glowLove 2s infinite alternate;
 }
 
-@keyframes fadeGlow{
+@keyframes glowLove{
 from{opacity:0.6;text-shadow:0 0 10px pink;}
 to{opacity:1;text-shadow:0 0 25px red;}
 }
 
-/* Hearts falling */
+/* Falling hearts */
 .heart{
 position:fixed;
 top:-10px;
@@ -185,6 +179,7 @@ opacity:0;
 <button id="yesBtn">Yes 💍</button>
 <button id="noBtn">No 😈</button>
 </div>
+</div>
 
 <div class="photo">
 <img src="our-love.jpg" alt="Our Photo">
@@ -196,15 +191,13 @@ opacity:0;
 
 <div id="loveText">I Love You Barkha ❤️</div>
 
-</div>
-
 <audio id="bgMusic" src="romantic-music.mp3"></audio>
 
 </div>
 
 <script>
 
-/* Hearts */
+/* Falling Hearts */
 function createHeart(){
 const heart=document.createElement("div");
 heart.classList.add("heart");
@@ -223,40 +216,52 @@ document.getElementById("questionSection").style.display="block";
 document.getElementById("bgMusic").play();
 };
 
-/* No button runs */
+/* No button runs away */
 const noBtn=document.getElementById("noBtn");
-noBtn.onmouseover=function(){
+noBtn.addEventListener("mouseover",function(){
 this.style.position="absolute";
 this.style.left=Math.random()*70+"%";
-this.style.top=Math.random()*70+"%";
-};
+this.style.top=Math.random()*60+"%";
+});
 
-/* Yes clicked */
+/* Yes click */
 document.getElementById("yesBtn").onclick=function(){
 
-startFireworks();
+// Hide question completely
+document.getElementById("questionSection").style.display="none";
 
+// Show content
 document.querySelector(".photo").style.display="block";
 document.querySelector(".ring").style.display="block";
 document.getElementById("loveText").style.display="block";
 
+// Clear previous message
+document.getElementById("message").innerHTML="";
+
+// Start fireworks
+startFireworks();
+
+// Start typing
 typeMessage();
 };
 
-/* Typewriter */
-const text=`I know, Barkha, that we haven’t been able to enjoy life as much as other couples. 
-We have been running behind making our life financially stable and peaceful. 
-But I believe in us — that if we are always together, we can fight through whatever situation comes our way. 
+/* Typewriter Message */
+const text = `Thank you so much, Barkha, for saying YES! ❤️
+
+I know, Barkha, that we haven’t been able to enjoy life as much as other couples. 
+We have been running behind in making our lives financially stable and peaceful. 
+But I believe in us, that if we are always together, we can fight through whatever situation comes our way. 
 I may not say it out loud every now and then, but you are my one and only lifeline. 
-I want you to be happy always, because seeing you happy makes me even happier. 
+I want you to be happy always, because seeing you happy makes me even happier.
+
 Happy Valentine’s Day, my love, my better half, my Barkhu. ❤️`;
 
 function typeMessage(){
 let i=0;
 const msg=document.getElementById("message");
 function typing(){
-if(i<text.length){
-msg.innerHTML+=text.charAt(i);
+if(i < text.length){
+msg.innerHTML += text.charAt(i);
 i++;
 setTimeout(typing,35);
 }
@@ -276,16 +281,17 @@ canvas.height=window.innerHeight;
 });
 
 let particles=[];
+let started=false;
 
 function createFirework(){
 let x=Math.random()*canvas.width;
 let y=Math.random()*canvas.height/2;
-for(let i=0;i<100;i++){
+for(let i=0;i<120;i++){
 particles.push({
 x:x,
 y:y,
 angle:Math.random()*2*Math.PI,
-speed:Math.random()*5+2,
+speed:Math.random()*6+2,
 alpha:1,
 color:`hsl(${Math.random()*360},100%,60%)`
 });
@@ -293,6 +299,8 @@ color:`hsl(${Math.random()*360},100%,60%)`
 }
 
 function startFireworks(){
+if(started) return;
+started=true;
 setInterval(createFirework,800);
 }
 
@@ -319,7 +327,6 @@ particles.splice(index,1);
 
 requestAnimationFrame(animate);
 }
-
 animate();
 
 </script>
