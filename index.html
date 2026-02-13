@@ -3,301 +3,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barkha ❤️ Nitesh</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<title>For My Barkha ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#140014,#330033);
-  color:white;
-  overflow:hidden;
-  text-align:center;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+overflow-x:hidden;
+color:white;
+text-align:center;
+min-height:100vh;
 }
 
-/* INTRO SCREEN */
-#intro{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-.gift{
-  font-size:60px;
-  animation:bounce 1.5s infinite;
-}
-@keyframes bounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-}
-.open-btn{
-  padding:15px 40px;
-  font-size:20px;
-  border:none;
-  border-radius:40px;
-  background:#ff4da6;
-  color:white;
-  cursor:pointer;
-  margin-top:20px;
+/* Fireworks canvas */
+#fireworks{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
 }
 
-/* MAIN */
-#main{display:none;padding:20px;}
+/* Main content */
+.container{
+position:relative;
+z-index:2;
+padding:40px 20px;
+max-width:900px;
+margin:auto;
+}
+
+/* Open Gift */
+#openGift{
+margin-top:150px;
+font-size:30px;
+padding:15px 40px;
+border:none;
+border-radius:50px;
+background:linear-gradient(45deg,#ff4b2b,#ff416c);
+color:white;
+cursor:pointer;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+/* Question section */
+#questionSection{
+display:none;
+margin-top:60px;
+}
 
 h1{
-  font-family:'Great Vibes',cursive;
-  font-size:38px;
-  margin-bottom:20px;
+font-family:'Great Vibes',cursive;
+font-size:55px;
+margin-bottom:20px;
 }
 
-.photo{
-  width:220px;
-  border-radius:20px;
-  box-shadow:0 0 30px #ff4da6;
-  animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-  from{box-shadow:0 0 20px #ff4da6;}
-  to{box-shadow:0 0 50px #ff99cc;}
+.buttons{
+margin-top:30px;
 }
 
-.buttons{margin-top:20px;}
 button{
-  padding:12px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  margin:10px;
-  cursor:pointer;
-}
-#yes{background:#00cc66;color:white;}
-#no{
-  background:#ff3333;
-  color:white;
-  position:absolute;
+padding:12px 35px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+margin:10px;
 }
 
+#yesBtn{
+background:#ff4b2b;
+color:white;
+}
+
+#noBtn{
+background:#999;
+color:white;
+position:relative;
+}
+
+/* Photo */
+.photo{
+margin-top:40px;
+display:none;
+}
+
+.photo img{
+width:250px;
+border-radius:20px;
+box-shadow:0 0 25px #ff4b2b;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{box-shadow:0 0 20px #ff4b2b;}
+to{box-shadow:0 0 40px #ff416c;}
+}
+
+/* Message */
 #message{
-  margin-top:25px;
-  max-width:750px;
-  margin-left:auto;
-  margin-right:auto;
-  font-size:18px;
-  min-height:150px;
+margin-top:40px;
+font-size:20px;
+line-height:1.8;
+white-space:pre-line;
+min-height:150px;
 }
 
-.love-text{
-  margin-top:25px;
-  font-family:'Great Vibes',cursive;
-  font-size:32px;
-  animation:blink 1.5s infinite;
-}
-@keyframes blink{
-  0%,100%{opacity:1;}
-  50%{opacity:0.4;}
+/* Ring */
+.ring{
+font-size:60px;
+margin-top:20px;
+display:none;
+animation:spin 3s linear infinite;
 }
 
-/* FALLING HEARTS */
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+/* I Love You animation */
+#loveText{
+font-family:'Great Vibes',cursive;
+font-size:45px;
+margin-top:40px;
+display:none;
+animation:fadeGlow 2s infinite alternate;
+}
+
+@keyframes fadeGlow{
+from{opacity:0.6;text-shadow:0 0 10px pink;}
+to{opacity:1;text-shadow:0 0 25px red;}
+}
+
+/* Hearts falling */
 .heart{
-  position:absolute;
-  color:#ff4da6;
-  animation:fall 6s linear infinite;
+position:fixed;
+top:-10px;
+color:pink;
+font-size:20px;
+animation:fall linear infinite;
+z-index:1;
 }
+
 @keyframes fall{
-  0%{transform:translateY(-10vh);}
-  100%{transform:translateY(110vh);}
+to{
+transform:translateY(100vh);
+opacity:0;
 }
-
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  pointer-events:none;
-}
-
-@media(max-width:600px){
-  h1{font-size:26px;}
-  .photo{width:160px;}
 }
 </style>
 </head>
 
 <body>
 
-<div id="intro">
-  <div class="gift">🎁</div>
-  <h1 style="font-family:Great Vibes;">For My Barkha 💖</h1>
-  <button class="open-btn" onclick="openGift()">Open Gift</button>
-</div>
-
-<div id="main">
-  <h1>Will you be my Valentine, Barkha? ❤️</h1>
-  <img src="our-love.jpg" class="photo">
-
-  <div class="buttons">
-    <button id="yes" onclick="accepted()">YES 💍</button>
-    <button id="no">NO 😈</button>
-  </div>
-
-  <div id="message"></div>
-  <div class="love-text">I Love You Barkha ❤️</div>
-</div>
-
-<audio id="music" src="romantic-music.mp3"></audio>
 <canvas id="fireworks"></canvas>
 
+<div class="container">
+
+<button id="openGift">🎁 Open Gift</button>
+
+<div id="questionSection">
+<h1>Will you be my Valentine, Barkha? ❤️</h1>
+
+<div class="buttons">
+<button id="yesBtn">Yes 💍</button>
+<button id="noBtn">No 😈</button>
+</div>
+
+<div class="photo">
+<img src="our-love.jpg" alt="Our Photo">
+</div>
+
+<div class="ring">💍</div>
+
+<div id="message"></div>
+
+<div id="loveText">I Love You Barkha ❤️</div>
+
+</div>
+
+<audio id="bgMusic" src="romantic-music.mp3"></audio>
+
+</div>
+
 <script>
-const intro=document.getElementById("intro");
-const main=document.getElementById("main");
-const music=document.getElementById("music");
-const noBtn=document.getElementById("no");
-const message=document.getElementById("message");
 
-function openGift(){
-  intro.style.display="none";
-  main.style.display="block";
-  music.play();
+/* Hearts */
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
 }
+setInterval(createHeart,300);
 
-/* NO BUTTON RUNS */
-noBtn.addEventListener("mouseover",()=>{
-  noBtn.style.top=Math.random()*80+"vh";
-  noBtn.style.left=Math.random()*80+"vw";
-});
+/* Open Gift */
+document.getElementById("openGift").onclick=function(){
+this.style.display="none";
+document.getElementById("questionSection").style.display="block";
+document.getElementById("bgMusic").play();
+};
 
-/* YES CLICK */
-function accepted(){
-  startFireworks();
-  typeWriter();
-}
+/* No button runs */
+const noBtn=document.getElementById("noBtn");
+noBtn.onmouseover=function(){
+this.style.position="absolute";
+this.style.left=Math.random()*70+"%";
+this.style.top=Math.random()*70+"%";
+};
 
-/* TYPEWRITER MESSAGE */
-function typeWriter(){
-let text=`I know, Barkha, that we haven’t been able to enjoy life as much as other couples. We have been running behind making our life financially stable and peaceful. But I believe in us — that if we are always together, we can fight through whatever situation comes our way. I may not say it out loud every now and then, but you are my one and only lifeline. I want you to be happy always, because seeing you happy makes me even happier. Happy Valentine’s Day, my love, my better half, my Barkhu.`;
+/* Yes clicked */
+document.getElementById("yesBtn").onclick=function(){
+
+startFireworks();
+
+document.querySelector(".photo").style.display="block";
+document.querySelector(".ring").style.display="block";
+document.getElementById("loveText").style.display="block";
+
+typeMessage();
+};
+
+/* Typewriter */
+const text=`I know, Barkha, that we haven’t been able to enjoy life as much as other couples. 
+We have been running behind making our life financially stable and peaceful. 
+But I believe in us — that if we are always together, we can fight through whatever situation comes our way. 
+I may not say it out loud every now and then, but you are my one and only lifeline. 
+I want you to be happy always, because seeing you happy makes me even happier. 
+Happy Valentine’s Day, my love, my better half, my Barkhu. ❤️`;
+
+function typeMessage(){
 let i=0;
-message.innerHTML="";
+const msg=document.getElementById("message");
 function typing(){
-  if(i<text.length){
-    message.innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(typing,40);
-  }
+if(i<text.length){
+msg.innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,35);
+}
 }
 typing();
 }
 
-/* HEARTS */
-setInterval(()=>{
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤️";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=Math.random()*20+10+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-},300);
-
-/* CINEMATIC FIREWORKS */
+/* Fireworks */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 window.addEventListener("resize",()=>{
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 });
 
-let rockets=[];
 let particles=[];
 
-class Rocket{
-  constructor(){
-    this.x=Math.random()*canvas.width;
-    this.y=canvas.height;
-    this.targetY=Math.random()*canvas.height/2+50;
-    this.speed=6;
-    this.exploded=false;
-    this.color=`hsl(${Math.random()*360},100%,60%)`;
-  }
-  update(){
-    this.y-=this.speed;
-    if(this.y<=this.targetY&&!this.exploded){
-      this.exploded=true;
-      explode(this.x,this.y,this.color);
-    }
-  }
-  draw(){
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,3,0,Math.PI*2);
-    ctx.fillStyle=this.color;
-    ctx.fill();
-  }
+function createFirework(){
+let x=Math.random()*canvas.width;
+let y=Math.random()*canvas.height/2;
+for(let i=0;i<100;i++){
+particles.push({
+x:x,
+y:y,
+angle:Math.random()*2*Math.PI,
+speed:Math.random()*5+2,
+alpha:1,
+color:`hsl(${Math.random()*360},100%,60%)`
+});
 }
-
-class Particle{
-  constructor(x,y,color){
-    this.x=x;
-    this.y=y;
-    this.color=color;
-    this.angle=Math.random()*2*Math.PI;
-    this.speed=Math.random()*6+2;
-    this.alpha=1;
-    this.gravity=0.05;
-  }
-  update(){
-    this.speed*=0.98;
-    this.x+=Math.cos(this.angle)*this.speed;
-    this.y+=Math.sin(this.angle)*this.speed+this.gravity;
-    this.alpha-=0.015;
-  }
-  draw(){
-    ctx.globalAlpha=this.alpha;
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,2.5,0,Math.PI*2);
-    ctx.fillStyle=this.color;
-    ctx.fill();
-    ctx.globalAlpha=1;
-  }
-}
-
-function explode(x,y,color){
-  for(let i=0;i<120;i++){
-    particles.push(new Particle(x,y,color));
-  }
 }
 
 function startFireworks(){
-  setInterval(()=>{
-    rockets.push(new Rocket());
-  },700);
-  animate();
+setInterval(createFirework,800);
 }
 
 function animate(){
-  ctx.fillStyle="rgba(0,0,0,0.2)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="rgba(0,0,0,0.2)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  rockets.forEach((rocket,i)=>{
-    rocket.update();
-    rocket.draw();
-    if(rocket.exploded){
-      rockets.splice(i,1);
-    }
-  });
+particles.forEach((p,index)=>{
+p.x+=Math.cos(p.angle)*p.speed;
+p.y+=Math.sin(p.angle)*p.speed;
+p.alpha-=0.02;
 
-  particles.forEach((p,i)=>{
-    p.update();
-    p.draw();
-    if(p.alpha<=0){
-      particles.splice(i,1);
-    }
-  });
+ctx.globalAlpha=p.alpha;
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle=p.color;
+ctx.fill();
+ctx.globalAlpha=1;
 
-  requestAnimationFrame(animate);
+if(p.alpha<=0){
+particles.splice(index,1);
 }
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
 </script>
 
 </body>
